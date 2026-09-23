@@ -1,0 +1,26 @@
+<main class="contenedor">
+
+  <header class="encabezado">
+    <p class="etiqueta">Pedidos360</p>
+    <h1>Gestión de pedidos y catálogo</h1>
+    <p>Autenticación con Microsoft Entra ID (MSAL) + BFF con JWT</p>
+
+    <nav *ngIf="user" class="nav">
+      <a routerLink="/dashboard">Inicio</a>
+      <a routerLink="/catalog">Catálogo</a>
+      <a routerLink="/orders">Pedidos</a>
+      <span class="usuario">{{ user.username }}</span>
+      <button class="secundario" (click)="logout()">Cerrar sesión</button>
+    </nav>
+  </header>
+
+  <section *ngIf="!user" class="tarjeta">
+    <h2>Usuario no autenticado</h2>
+    <p>Inicia sesión con Microsoft Entra ID para continuar.</p>
+
+    <button (click)="login()">Iniciar sesión con Microsoft</button>
+  </section>
+
+  <router-outlet *ngIf="user"></router-outlet>
+
+</main>
