@@ -11,14 +11,13 @@ export class OrdersService {
 
   constructor(private http: HttpClient) {}
 
-  listarTodos(): Observable<Pedido[]> {
+  /**
+   * Una sola llamada para todos los roles: el BFF decide, mirando el token,
+   * si devuelve todos los pedidos (Administrador/Operador) o solo los del
+   * Cliente autenticado. El frontend ya no elige el endpoint según el rol.
+   */
+  listar(): Observable<Pedido[]> {
     return this.http.get<Pedido[]>(this.baseUrl);
-  }
-
-  listarMios(): Observable<Pedido[]> {
-    // El BFF ignora cualquier "usuario" que mandemos y usa el del JWT,
-    // pero el endpoint igual requiere el query param por consistencia con orders.
-    return this.http.get<Pedido[]>(`${this.baseUrl}/mios`, { params: { usuario: 'yo' } });
   }
 
   crear(pedido: Pedido): Observable<Pedido> {

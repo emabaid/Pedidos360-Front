@@ -130,11 +130,7 @@ export class Orders implements OnInit {
   cargarPedidos(): void {
     this.cargando.set(true);
 
-    const fuente = this.esClienteSolo()
-      ? this.ordersService.listarMios()
-      : this.ordersService.listarTodos();
-
-    fuente.subscribe({
+    this.ordersService.listar().subscribe({
       next: (pedidos) => {
         this.pedidos.set(pedidos);
         this.cargando.set(false);
