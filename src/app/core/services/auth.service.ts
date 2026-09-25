@@ -64,8 +64,6 @@ export class AuthService {
       const payloadJson = atob(payloadBase64.replace(/-/g, '+').replace(/_/g, '/'));
       const payload = JSON.parse(payloadJson);
 
-      // TEMPORAL (quitar antes de entregar): así podemos ver "aud" y "roles"
-      // reales del access token para terminar de configurar el BFF.
       console.log('[DEBUG access token payload]', payload);
 
       const rolesClaim: string[] = payload['roles'] ?? [];
